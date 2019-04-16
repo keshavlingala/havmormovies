@@ -1,0 +1,78 @@
+<div *ngIf="!loading" class="container p-3 overflow-hidden">
+  <mat-card>
+    <div class="text-center p-4">
+      <img class="w-50" [src]="_selectImdbMovie.Poster" alt="">
+    </div>
+    <mat-card-header>
+      <h1> {{selectedMovie.title}}</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>{{selectImdbMovie.Year}} | {{selectImdbMovie.Released}}</mat-list-item>
+        <h2 mat-subheader>Plot</h2>
+        <p>{{selectImdbMovie.Plot}}</p>
+        <h2 mat-subheader>Genre</h2>
+        <p>{{selectImdbMovie.Genre}}</p>
+        <h2 mat-subheader>Directors</h2>
+        <p>{{selectImdbMovie.Director}}</p>
+        <h2 mat-subheader>Actors</h2>
+        <p>
+          {{selectImdbMovie.Actors}}
+        </p>
+        <h2 *ngIf="selectImdbMovie.Awards!='N/A'" mat-subheader>Awards</h2>
+        <p *ngIf="selectImdbMovie.Awards!='N/A'">
+          {{selectImdbMovie.Awards }}
+        </p>
+        <h2 mat-subheader>Writer</h2>
+        <p>
+          {{selectImdbMovie.Writer}}
+        </p>
+        <mat-card-actions>
+          <button (click)="href('https://www.imdb.com/title/'+selectedMovie.imdb_id)" mat-button>
+            <img
+              matTooltip="Imdb Rating {{selectImdbMovie.imdbRating}}" src="assets/imdb.png"
+              width="50px" alt="Imdb">
+          </button>
+          <button
+            (click)="href(selectedMovie.trailer)" mat-button>
+            <img matTooltip="Watch Trailer"
+                 src="assets/youtube.png" width="50px"
+                 alt="Trailer">
+          </button>
+          <button (click)="href(selectImdbMovie.Website)" matTooltip="Open Movie Website" mat-button>
+            <mat-icon>link</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-list>
+      <mat-card-footer>
+        <mat-list>
+          <h3 mat-subheader>Torrent Links</h3>
+          <mat-list-item mat-line *ngIf="selectedMovie.torrents.en['1080p']">
+            <img (click)="auxclick(selectedMovie.torrents.en['1080p'].url)" matTooltip="Click to Copy Magnet URL"
+                 mat-list-icon width="50px" height="50px" src="assets/magnet.png" alt="">
+            <button matTooltip="{{selectedMovie.torrents.en['1080p'].filesize}}"
+                    matTooltipPosition="right"
+                    (click)="stream(selectedMovie.torrents.en['1080p'].url)" mat-button>1080p
+            </button>
+            <h6 class="small">{{selectedMovie.torrents.en['1080p'].seed}}
+              seeds/{{selectedMovie.torrents.en['1080p'].peer}} peers</h6>
+          </mat-list-item>
+          <mat-list-item *ngIf="selectedMovie.torrents.en['720p']">
+            <img (click)="auxclick(selectedMovie.torrents.en['720p'].url)" matTooltip="Click to Copy Magnet URL"
+                 mat-list-icon width="50px" height="50px" src="assets/magnet.png" alt="">
+            <button matTooltip="{{selectedMovie.torrents.en['720p'].filesize}}"
+                    matTooltipPosition="right"
+                    (click)="stream(selectedMovie.torrents.en['720p'].url)" mat-button>720p
+            </button>
+            <h6 class="small">{{selectedMovie.torrents.en['720p'].seed}}
+              seeds/{{selectedMovie.torrents.en['720p'].peer}} peers</h6>
+          </mat-list-item>
+        </mat-list>
+        <div class="text-info p-4"> Use Any Torrent Downloader to Download using the Magnet Url</div>
+      </mat-card-footer>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div *ngIf="loading" class="text-center m-5">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>

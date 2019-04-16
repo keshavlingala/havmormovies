@@ -1,0 +1,47 @@
+<div *ngIf="!loading" class="container">
+  <div class="row">
+    <div *ngFor="let movie of movieDB.movies" class="col-12 col-lg-6 col-md-6 col-sm-12 ">
+      <mat-card data-aos="fade-up" class="card-item hvr-glow hvr-float-shadow">
+        <div class="row">
+          <div class="col-12 col-lg-6 col-md-12 col-sm-12 ">
+            <img (click)="brief(movie)" class="resize_fit_center cursor-pointer" [src]="movie.images.poster" alt="">
+          </div>
+          <div class="col-12 col-lg-6 col-md-12 col-sm-12">
+            <mat-card-header>
+              <mat-card-title class="cursor-pointer"  (click)="brief(movie)">{{movie.title}}</mat-card-title>
+              <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="small">
+              <p class="text-justify"> {{(movie.synopsis | slice:0:200) + '..'}}
+                <a (click)="brief(movie)" matTooltip="View Full Movie Description" mat-button class="cursor-pointer">more</a>
+              </p>
+            </mat-card-content>
+            <mat-card-actions (click)="brief(movie)" class="cursor-pointer">
+
+              <p class="small" *ngIf="movie.torrents.en['1080p']">
+                1080p: {{movie.torrents.en['1080p'].filesize}} | {{movie.torrents.en['1080p'].seed}} seeds
+              </p>
+              <p class="small" *ngIf="movie.torrents.en['720p']">
+                720p: {{movie.torrents.en['720p'].filesize}} | {{movie.torrents.en['720p'].seed}} seeds
+              </p>
+
+            </mat-card-actions>
+            <mat-card-footer class="small">
+              {{movie.runtime}}min |
+              <img matTooltip="Watch Trailer" matTooltipPosition="above"
+                   (click)="href(movie.trailer)" width="30px"
+                   src="assets/youtube.png" alt="Youtube">|
+              <img matTooltip="{{movie.rating.percentage/10 |number}}/10" matTooltipPosition="above"
+                   (click)="href('https://www.imdb.com/title/'+movie.imdb_id)" width="30px"
+                   src="assets/imdb.png" alt="Imdb">
+              | {{movie.rating.votes}} votes
+            </mat-card-footer>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="text-center  m-5">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
