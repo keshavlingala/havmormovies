@@ -16,6 +16,10 @@ import {MoviesListComponent} from './movies-list/movies-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {FullMovieDescComponent} from './full-movie-desc/full-movie-desc.component';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireFunctionsModule, FunctionsRegionToken} from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -41,12 +45,17 @@ import {FullMovieDescComponent} from './full-movie-desc/full-movie-desc.componen
     MatSnackBarModule,
     MatCardModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireFunctionsModule,
     MatButtonModule,
     MatRadioModule,
     MatButtonToggleModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: FunctionsRegionToken, useValue: 'asia-northeast1'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

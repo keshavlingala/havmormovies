@@ -4,6 +4,7 @@ import {MoviesListComponent} from './movies-list/movies-list.component';
 import {FullMovieDescComponent} from './full-movie-desc/full-movie-desc.component';
 
 const routes: Routes = [
+  // {path: 'functions', component: NgFunctionsComponent},
   {path: '', component: MoviesListComponent},
   {path: 'movie/:title', component: FullMovieDescComponent}
 ];

@@ -1,12 +1,11 @@
 <mat-toolbar class="w-100 sticky-top">
   <button routerLink="/" mat-button>Havmor Movies</button>
   <button matTooltip="Click to Change the Sort Order" class="text-capitalize" mat-button
-          [matMenuTriggerFor]="sort">{{dataService.currSort}}</button>
+    [matMenuTriggerFor]="sort">{{dataService.currSort}}</button>
+  <span class="flex-fill"></span>
   <mat-menu #sort="matMenu">
     <button class="text-capitalize" *ngFor="let sort of dataService.sorters" (click)="sortMovies(sort)"
-            matTooltip="sort by {{sort}}"
-            matTooltipPosition="after"
-            mat-menu-item>{{sort}}</button>
+      matTooltip="sort by {{sort}}" matTooltipPosition="after" mat-menu-item>{{sort}}</button>
   </mat-menu>
 </mat-toolbar>
 <div class="container-fluid bg-dark">

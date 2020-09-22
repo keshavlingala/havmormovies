@@ -50,11 +50,11 @@ export class MovieDbService {
 
   async  load(sort?: string) {
     if (sort) {
-       await  this.http.get('https://movies-v2.api-fetch.website/movies/1?sort=' + sort).subscribe(res => {
+       await  this.http.get('https://movies-v2.api-fetch.sh/movies/1?sort=' + sort).subscribe(res => {
         this._movies = res as Movie[];
       });
     } else {
-      await this.http.get('https://movies-v2.api-fetch.website/movies/1?sort=' + this.dataService.currSort).subscribe(res => {
+      await this.http.get('https://movies-v2.api-fetch.sh/movies/1?sort=' + this.dataService.currSort).subscribe(res => {
         this._movies = res as Movie[];
       });
     }

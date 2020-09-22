@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {MovieDbService} from './services/movie-db.service';
+import { Component, OnInit } from '@angular/core';
+import { MovieDbService } from './services/movie-db.service';
 import * as aos from 'aos';
-import {DataService} from './services/data-service.service';
-import {MatMenu} from '@angular/material';
+import { DataService } from './services/data-service.service';
+import { MatMenu } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -12,8 +14,11 @@ import {MatMenu} from '@angular/material';
 export class AppComponent implements OnInit {
   title = 'Humor';
 
-  constructor(private _movdb: MovieDbService,
-              private _dataService: DataService) {
+  constructor(
+    private _movdb: MovieDbService,
+    private _dataService: DataService,
+    private http: HttpClient
+  ) {
     aos.init();
   }
 
